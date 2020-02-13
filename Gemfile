@@ -63,3 +63,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #ログイン機能用
 gem 'devise'
+
+#bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jquery-rails'
+
+#画像投稿用
+gem 'refile', require: 'refile/rails', github: 'manfe/refile'
+gem 'refile-mini_magick'
