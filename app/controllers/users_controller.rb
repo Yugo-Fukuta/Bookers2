@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.page(params[:page]).reverse_order
-    @user = User.find(current_user.id)
+    @user = current_user
     @book = @user.books.new
   end
   def show
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "You have updated user successfully."
-      redirect_to user_path(@user.id)
+      redirect_to user_path(@user)
     else
       render :edit
     end

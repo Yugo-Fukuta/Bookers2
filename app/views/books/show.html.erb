@@ -1,49 +1,4 @@
-<% if @new_book.errors.any? %>
-<div id="error_explanation">
-  <h3><%= @new_book.errors.count %> errors prohibited this obj from being saved</h3>
-  <ul>
-    <% @new_book.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-<div class='col-xs-3'>
-  <h2>User info</h2>
-  <table class='table'>
-    <tr>
-      <%= attachment_image_tag @book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class:"attachment user profile_image fallback" , fallback: "no_image.jpg" %>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th><%= @book.user.name %></th>
-    </tr>
-    <tr>
-      <th>introduction</th>
-      <th><%= @book.user.introduction %></th>
-    </tr>
-  </table>
-
-  <div class='row'>
-    <%= link_to "", edit_user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
-  </div>
-
-  <%= form_for(@new_book) do |f| %>
-  <h2>New book</h2>
-  <div class="field row">
-    <label for="book_title">Title</label>
-    <%= f.text_field :title, class:"col-xs-12 book_title" %>
-  </div>
-  <div class="field row">
-    <label for="book_opinion">Opinion</label>
-    <%= f.text_area :body, class:"col-xs-12 book_body", rows:"3" %>
-  </div>
-  <div class="actions row">
-    <%= f.submit "Create Book", class:"btn btn-primary col-xs-12" %>
-  </div>
-  <% end %>
-
-</div>
+<%= render 'shared/common', book: @book, user: @user %>
 
 <div class='col-xs-9'>
   <h2>Book detail</h2>
@@ -60,14 +15,14 @@
     <tbody>
         <tr>
             <td>
-              <%= attachment_image_tag @book.user, :profile_image, :fill, 40, 40, format: 'jpeg', class:"attachment user profile_image fallback" , fallback: "no_image.jpg" %><br>
-              <%= link_to @book.user.name, user_path(@book.user) %>
+              <%= attachment_image_tag @detailed_book.user, :profile_image, :fill, 40, 40, format: 'jpeg', class:"attachment user profile_image fallback" , fallback: "no_image.jpg" %><br>
+              <%= link_to @detailed_book.user.name, user_path(@detailed_book.user) %>
             </td>
-            <td><%= link_to @book.title, book_path(@book) %></td>
-            <td><%= @book.body %></td>
-          <% if current_user.id == @book.user_id %>
-            <td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success" %></td>
-            <td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"},class: "btn-sm btn-danger" %></td>
+            <td><%= link_to @detailed_book.title, book_path(@detailed_book) %></td>
+            <td><%= @detailed_book.body %></td>
+          <% if current_user.id == @detailed_book.user_id %>
+            <td><%= link_to "Edit", edit_book_path(@detailed_book), class: "btn-sm btn-success" %></td>
+            <td><%= link_to "Destroy", book_path(@detailed_book), method: :delete, data: {confirm: "本当に消しますか？"},class: "btn-sm btn-danger" %></td>
           <% end %>
         </tr>
     </tbody>
